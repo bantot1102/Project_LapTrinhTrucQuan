@@ -20,7 +20,7 @@ const [taskName, setTaskName] = useState("")
           type="text"
           placeholder="Description"
           className="w-full p-2 mt-2 rounded border"
-          onChange={(e)=> setTaskName(e.target.value)}
+          onChange={(e) => setTaskName(e.target.value)}
         />
         <div className="flex items-center mt-4">
           <button className="bg-blue-500 text-white p-2 rounded">Today</button>
@@ -28,18 +28,21 @@ const [taskName, setTaskName] = useState("")
           <button className="ml-2 p-2 border rounded">Reminders</button>
         </div>
         <div className="mt-4">
-          <button className="bg-green-500 text-white p-2 rounded" onClick={()=>(
-            setItems((pre)=>[...pre, "new item"])
-          )}>Add task</button>
+          <button
+            className="bg-green-500 text-white p-2 rounded"
+            onClick={() => setItems((pre) => [...pre, "new item"])}
+          >
+            Add task
+          </button>
           <button className="bg-red-500 text-white p-2 rounded ml-2">
             Cancel
           </button>
         </div>
       </div>
       <div className="flex flex-col">
-        {items.map((item)=>
-        (
-          <TaskItem taskName={item} Des={""} />
+        {items.map((item) => (
+          // <TaskItem taskName={item} Des={""} />
+          <TaskItem />
         ))}
       </div>
     </div>
