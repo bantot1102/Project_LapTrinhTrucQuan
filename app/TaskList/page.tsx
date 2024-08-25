@@ -95,13 +95,11 @@ const TaskList = () => {
         <div className="flex items-center mt-4">
           <button
             ref={buttonRef} // Để tính toán vị trí
-            className="bg-blue-500 text-white p-2 rounded"
+            className="bg-blue-500 text-white p-2 rounded w-40"
             onClick={toggleDatePicker}
           >
             Today
           </button>
-          <button className="ml-2 p-2 border rounded">Priority</button>
-          <button className="ml-2 p-2 border rounded">Reminders</button>
         </div>
         {showDatePicker && (
           <div ref={datePickerRef} className="mt-4">
