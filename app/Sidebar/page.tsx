@@ -1,9 +1,10 @@
-"use client";
-import Link from "next/link";
+interface SidebarProps {
+  taskCount: number;
+}
 
-const Sidebar = () => {
+const Sidebar: React.FC<SidebarProps> = ({ taskCount }) => {
   return (
-    <div className="bg-white w-64 min-h-screen shadow-md">
+    <div className="bg-[#FCFAF8] w-64 min-h-screen shadow-md">
       <div className="p-4 border-b">
         <div className="flex items-center">
           <div className="w-10 h-10 bg-gray-300 rounded-full"></div>
@@ -13,7 +14,7 @@ const Sidebar = () => {
         </div>
       </div>
       <div className="p-4">
-        <button className="w-full text-left p-2 rounded hover:bg-gray-200">
+        <button className="w-full text-left p-2 rounded hover:bg-[#FFEFE5]">
           Add task
         </button>
         <div className="mt-4">
@@ -25,33 +26,30 @@ const Sidebar = () => {
         </div>
         <nav className="mt-4">
           <ul>
-            <li className="p-2 rounded hover:bg-gray-200">
+            <li className="p-2 rounded hover:bg-orange-200">
               <a href="#">
                 Inbox <span className="ml-2 text-gray-500">3</span>
               </a>
             </li>
-            <li className="p-2 rounded hover:bg-gray-200">
+            <li className="p-2 rounded hover:bg-[#FFEFE5]">
               <a href="#">
-                Today <span className="ml-2 text-gray-500">1</span>
+                Today <span className="ml-2 text-gray-500">{taskCount}</span>
               </a>
             </li>
-            <li className="p-2 rounded hover:bg-gray-200">
+            <li className="p-2 rounded hover:bg-[#FFEFE5]">
               <a href="#">Upcoming</a>
-            </li>
-            <li className="p-2 rounded hover:bg-gray-200">
-              <a href="#">Filters & Labels</a>
             </li>
           </ul>
         </nav>
         <div className="mt-4">
           <h2 className="text-lg font-bold">My Projects</h2>
           <ul>
-            <li className="p-2 rounded hover:bg-gray-200">
+            <li className="p-2 rounded hover:bg-[#FFEFE5]">
               <a href="#">
                 Home <span className="ml-2">🏡</span>
               </a>
             </li>
-            <li className="p-2 rounded hover:bg-gray-200">
+            <li className="p-2 rounded hover:bg-[#FFEFE5]">
               <a href="#">
                 My work <span className="ml-2">🎯</span>
               </a>
@@ -59,12 +57,12 @@ const Sidebar = () => {
           </ul>
         </div>
         <div className="mt-4">
-          <button className="w-full text-left p-2 rounded hover:bg-gray-200">
+          <button className="w-full text-left p-2 rounded hover:bg-[#FFEFE5]">
             Add a team
           </button>
         </div>
         <div className="mt-4">
-          <button className="w-full text-left p-2 rounded hover:bg-gray-200">
+          <button className="w-full text-left p-2 rounded hover:bg-[#FFEFE5]">
             Browse templates
           </button>
         </div>

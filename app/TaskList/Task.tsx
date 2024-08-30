@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-
+import Link from "next/link";
 interface TaskItemProps {
   taskName: string;
   description: string;
@@ -45,7 +45,9 @@ const TaskItem: React.FC<TaskItemProps> = ({
         </div>
       </div>
       <div className="flex items-center space-x-4">
-        <div className="text-sm text-gray-500">My work 🎯 / Routines 🔄</div>
+        <button className="text-sm text-gray-500">
+          My work 🎯 / Routines 🔄
+        </button>
       </div>
     </div>
   );

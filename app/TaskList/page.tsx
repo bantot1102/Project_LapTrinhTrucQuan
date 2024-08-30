@@ -1,76 +1,34 @@
-import { useState, useRef, useEffect } from "react";
-import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
+import React, { useState } from "react";
+import CustomDatePicker from "../CustomDatePicker/page";
 import TaskItem from "./Task";
+import Link from "next/link";
 
 interface Task {
   taskName: string;
   description: string;
-  date?: Date; // Có thể là Date hoặc không có
+  date?: Date;
 }
 
-const TaskList = () => {
-  const [items, setItems] = useState<Task[]>([]);
-  const [taskName, setTaskName] = useState("");
-  const [description, setDescription] = useState("");
-  const [showDatePicker, setShowDatePicker] = useState(false);
+interface TaskListProps {
+  tasks: Task[];
+  addTask: (task: Task) => void;
+  removeTask: (index: number) => void;
+}
+
+const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, removeTask }) => {
+  const [taskName, setTaskName] = useState<string>("");
+  const [description, setDescription] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
-  const [isSelectingDate, setIsSelectingDate] = useState(false);
-  const datePickerRef = useRef<HTMLDivElement | null>(null);
-  const buttonRef = useRef<HTMLButtonElement | null>(null);
 
   const addItem = () => {
     if (taskName.trim() && description.trim()) {
-      const dateToUse = selectedDate ?? new Date(); // Sử dụng ngày hiện tại nếu không có ngày được chọn
-      setItems([...items, { taskName, description, date: dateToUse }]);
+      const dateToUse = selectedDate ?? new Date();
+      addTask({ taskName, description, date: dateToUse });
       setTaskName("");
       setDescription("");
       setSelectedDate(null);
-      setShowDatePicker(false); // Đóng DatePicker sau khi thêm task
     }
   };
-
-  const toggleDatePicker = () => {
-    setShowDatePicker(!showDatePicker);
-  };
-
-  const handleRemoveTask = (index: number) => {
-    const newItems = items.filter((_, i) => i !== index);
-    setItems(newItems);
-  };
-
-  const handleDateChange = (date: Date | null) => {
-    if (date) {
-      setSelectedDate(date);
-      if (isSelectingDate) {
-        setShowDatePicker(false); // Đóng DatePicker khi chọn ngày
-      }
-    }
-  };
-
-  const handleDatePickerChange = (date: Date | null) => {
-    setIsSelectingDate(true);
-    handleDateChange(date);
-  };
-
-  const handleTimeChange = (date: Date | null) => {
-    setIsSelectingDate(false);
-    handleDateChange(date);
-  };
-
-  // Tính toán vị trí của DatePicker dựa trên vị trí của nút Today
-  useEffect(() => {
-    if (showDatePicker && buttonRef.current && datePickerRef.current) {
-      const buttonRect = buttonRef.current.getBoundingClientRect();
-      datePickerRef.current.style.position = "absolute";
-      datePickerRef.current.style.top = `${
-        buttonRect.top + window.scrollY + buttonRect.height
-      }px`; // Đặt ở phía dưới nút
-      datePickerRef.current.style.left = `${
-        buttonRect.left + window.scrollX - datePickerRef.current.offsetWidth
-      }px`; // Đặt ở phía bên trái nút
-    }
-  }, [showDatePicker]);
 
   return (
     <div className="bg-white p-4 rounded shadow relative">
@@ -92,33 +50,12 @@ const TaskList = () => {
           className="w-full p-2 mt-2 rounded border"
           onChange={(e) => setDescription(e.target.value)}
         />
-        <div className="flex items-center mt-4">
-          <button
-            ref={buttonRef} // Để tính toán vị trí
-            className="bg-blue-500 text-white p-2 rounded w-40"
-            onClick={toggleDatePicker}
-          >
-            Today
-          </button>
+        <div className="mt-4">
+          <CustomDatePicker
+            selectedDate={selectedDate}
+            onDateChange={setSelectedDate}
+          />
         </div>
-        {showDatePicker && (
-          <div ref={datePickerRef} className="mt-4">
-            <DatePicker
-              selected={selectedDate}
-              onChange={(date: Date | null) => {
-                if (date && date.getDate() !== (selectedDate?.getDate() ?? 0)) {
-                  handleDatePickerChange(date);
-                } else {
-                  handleTimeChange(date);
-                }
-              }}
-              showTimeSelect
-              timeIntervals={15}
-              dateFormat="Pp"
-              inline
-            />
-          </div>
-        )}
         <div className="mt-4">
           <button
             className="bg-green-500 text-white p-2 rounded"
@@ -131,7 +68,7 @@ const TaskList = () => {
             onClick={() => {
               setTaskName("");
               setDescription("");
-              setShowDatePicker(false);
+              setSelectedDate(null);
             }}
           >
             Cancel
@@ -139,14 +76,25 @@ const TaskList = () => {
         </div>
       </div>
       <div className="flex flex-col">
-        {items.map((item, index) => (
+        {tasks.map((item, index) => (
           <TaskItem
             key={index}
             taskName={item.taskName}
             description={item.description}
             date={item.date}
-            onRemove={() => handleRemoveTask(index)}
+            onRemove={() => removeTask(index)}
           />
+          // <Link href={"/item/" + item.taskName + item.description + item.date}>
+          //   <div>
+          //     <TaskItem
+          //       key={index}
+          //       taskName={item.taskName}
+          //       description={item.description}
+          //       date={item.date}
+          //       onRemove={() => removeTask(index)}
+          //     />
+          //   </div>
+          // </Link>
         ))}
       </div>
     </div>
