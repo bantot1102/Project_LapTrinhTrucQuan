@@ -1,8 +1,6 @@
 import { kv } from "@vercel/kv";
 
 export async function POST(request: Request) {
-  //   const items = request.body;
-  //   console.log(items);
   const params = await request.json();
   console.log(params);
   kv.set("items", params.items);

@@ -1,8 +1,9 @@
 interface SidebarProps {
   taskCount: number;
+  completedTaskCount: number; // Thêm props completedTaskCount
 }
 
-const Sidebar: React.FC<SidebarProps> = ({ taskCount }) => {
+const Sidebar: React.FC<SidebarProps> = ({ taskCount, completedTaskCount }) => {
   return (
     <div className="bg-[#FCFAF8] w-64 min-h-screen shadow-md">
       <div className="p-4 border-b">
@@ -37,7 +38,10 @@ const Sidebar: React.FC<SidebarProps> = ({ taskCount }) => {
               </a>
             </li>
             <li className="p-2 rounded hover:bg-[#FFEFE5]">
-              <a href="#">Upcoming</a>
+              <a href="#">
+                Complete{" "}
+                <span className="ml-2 text-gray-500">{completedTaskCount}</span>
+              </a>
             </li>
           </ul>
         </nav>
@@ -55,16 +59,6 @@ const Sidebar: React.FC<SidebarProps> = ({ taskCount }) => {
               </a>
             </li>
           </ul>
-        </div>
-        <div className="mt-4">
-          <button className="w-full text-left p-2 rounded hover:bg-[#FFEFE5]">
-            Add a team
-          </button>
-        </div>
-        <div className="mt-4">
-          <button className="w-full text-left p-2 rounded hover:bg-[#FFEFE5]">
-            Browse templates
-          </button>
         </div>
       </div>
     </div>

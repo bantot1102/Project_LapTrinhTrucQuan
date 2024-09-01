@@ -1,17 +1,17 @@
 import React, { useState } from "react";
-import Link from "next/link";
+
 interface TaskItemProps {
   taskName: string;
   description: string;
   date?: Date;
-  onRemove: () => void;
+  onComplete: () => void;
 }
 
 const TaskItem: React.FC<TaskItemProps> = ({
   taskName,
   description,
   date,
-  onRemove,
+  onComplete,
 }) => {
   const [clickCount, setClickCount] = useState(0);
 
@@ -19,7 +19,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
     setClickCount((prevCount) => {
       const newCount = prevCount + 1;
       if (newCount >= 2) {
-        onRemove(); // Xóa task nếu nhấp 2 lần
+        onComplete(); // Gọi hàm onComplete khi nhấp 2 lần
         return 0; // Reset số lần nhấp để không xóa lần tiếp theo
       }
       return newCount;
@@ -43,11 +43,6 @@ const TaskItem: React.FC<TaskItemProps> = ({
             </p>
           )}
         </div>
-      </div>
-      <div className="flex items-center space-x-4">
-        <button className="text-sm text-gray-500">
-          My work 🎯 / Routines 🔄
-        </button>
       </div>
     </div>
   );

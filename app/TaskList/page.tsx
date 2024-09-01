@@ -1,7 +1,6 @@
 import React, { useState } from "react";
 import CustomDatePicker from "../CustomDatePicker/page";
 import TaskItem from "./Task";
-import Link from "next/link";
 
 interface Task {
   taskName: string;
@@ -13,9 +12,17 @@ interface TaskListProps {
   tasks: Task[];
   addTask: (task: Task) => void;
   removeTask: (index: number) => void;
+  removeAllTasks: () => void; // Thêm hàm removeAllTasks
+  markTaskComplete: (index: number) => void;
 }
 
-const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, removeTask }) => {
+const TaskList: React.FC<TaskListProps> = ({
+  tasks,
+  addTask,
+  removeTask,
+  markTaskComplete,
+  removeAllTasks,
+}) => {
   const [taskName, setTaskName] = useState<string>("");
   const [description, setDescription] = useState<string>("");
   const [selectedDate, setSelectedDate] = useState<Date | null>(null);
@@ -69,9 +76,10 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, removeTask }) => {
               setTaskName("");
               setDescription("");
               setSelectedDate(null);
+              removeAllTasks();
             }}
           >
-            Cancel
+            Delete all
           </button>
         </div>
       </div>
@@ -82,23 +90,13 @@ const TaskList: React.FC<TaskListProps> = ({ tasks, addTask, removeTask }) => {
             taskName={item.taskName}
             description={item.description}
             date={item.date}
-            onRemove={() => removeTask(index)}
+            onComplete={() => markTaskComplete(index)} // Truyền markTaskComplete
           />
-          // <Link href={"/item/" + item.taskName + item.description + item.date}>
-          //   <div>
-          //     <TaskItem
-          //       key={index}
-          //       taskName={item.taskName}
-          //       description={item.description}
-          //       date={item.date}
-          //       onRemove={() => removeTask(index)}
-          //     />
-          //   </div>
-          // </Link>
         ))}
       </div>
     </div>
   );
 };
+
 
 export default TaskList;
