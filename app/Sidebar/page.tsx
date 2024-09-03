@@ -56,11 +56,6 @@ const Sidebar: React.FC<SidebarProps> = ({
         </div>
         <nav className="mt-4">
           <ul>
-            <li className="p-2 rounded hover:bg-orange-200">
-              <a href="#">
-                Inbox <span className="ml-2 text-gray-500">3</span>
-              </a>
-            </li>
             <li className="p-2 rounded hover:bg-[#FFEFE5]">
               <a href="#">
                 Today <span className="ml-2 text-gray-500">{taskCount}</span>
