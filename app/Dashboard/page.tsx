@@ -2,7 +2,7 @@ import { useState } from "react";
 import Sidebar from "../Sidebar/page";
 import TaskList from "../TaskList/page";
 
-interface Task {
+export interface Task {
   taskName: string;
   description: string;
   date?: Date;
@@ -26,6 +26,11 @@ export default function Dashboard() {
     setCompletedTasks(completedTasks + 1); // Tăng số lượng task hoàn thành
   };
 
+  const updateTask = (index: number, newTask: Task) => {
+    const updatedTasks = tasks.map((task, i) => (i === index ? newTask : task));
+    setTasks(updatedTasks);
+  };
+
   const removeAllTasks = () => {
     setTasks([]);
   };
@@ -39,9 +44,12 @@ export default function Dashboard() {
           addTask={addTask}
           removeTask={removeTask}
           markTaskComplete={markTaskComplete}
+          updateTask={updateTask}
           removeAllTasks={removeAllTasks}
         />
       </div>
     </div>
   );
 }
+
+

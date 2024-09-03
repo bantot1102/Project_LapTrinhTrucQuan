@@ -1,19 +1,15 @@
 import React, { useState } from "react";
 import CustomDatePicker from "../CustomDatePicker/page";
 import TaskItem from "./Task";
-
-interface Task {
-  taskName: string;
-  description: string;
-  date?: Date;
-}
+import { Task } from "../Dashboard/page";
 
 interface TaskListProps {
   tasks: Task[];
   addTask: (task: Task) => void;
   removeTask: (index: number) => void;
-  removeAllTasks: () => void; // Thêm hàm removeAllTasks
   markTaskComplete: (index: number) => void;
+  updateTask: (index: number, newTask: Task) => void;
+  removeAllTasks: () => void;
 }
 
 const TaskList: React.FC<TaskListProps> = ({
@@ -21,6 +17,7 @@ const TaskList: React.FC<TaskListProps> = ({
   addTask,
   removeTask,
   markTaskComplete,
+  updateTask,
   removeAllTasks,
 }) => {
   const [taskName, setTaskName] = useState<string>("");
@@ -36,7 +33,6 @@ const TaskList: React.FC<TaskListProps> = ({
       setSelectedDate(null);
     }
   };
-
   return (
     <div className="bg-white p-4 rounded shadow relative">
       <h1 className="text-2xl font-bold">Today</h1>
@@ -90,7 +86,8 @@ const TaskList: React.FC<TaskListProps> = ({
             taskName={item.taskName}
             description={item.description}
             date={item.date}
-            onComplete={() => markTaskComplete(index)} // Truyền markTaskComplete
+            onComplete={() => markTaskComplete(index)}
+            onUpdate={(newTask) => updateTask(index, newTask)}
           />
         ))}
       </div>
@@ -98,5 +95,8 @@ const TaskList: React.FC<TaskListProps> = ({
   );
 };
 
-
 export default TaskList;
+
+
+
+

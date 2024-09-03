@@ -15,9 +15,6 @@ const Sidebar: React.FC<SidebarProps> = ({ taskCount, completedTaskCount }) => {
         </div>
       </div>
       <div className="p-4">
-        <button className="w-full text-left p-2 rounded hover:bg-[#FFEFE5]">
-          Add task
-        </button>
         <div className="mt-4">
           <input
             type="text"
