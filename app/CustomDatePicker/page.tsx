@@ -24,7 +24,7 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
 
   const handleDateChange = (date: Date | null) => {
     onDateChange(date);
-    setShowCalendar(false); // Tắt bảng lịch sau khi chọn ngày
+    setShowCalendar(false);
   };
 
   useEffect(() => {
@@ -83,13 +83,13 @@ const CustomDatePicker: React.FC<CustomDatePickerProps> = ({
             </button>
             <button
               className="block w-full text-left p-2 rounded hover:bg-gray-200"
-              onClick={() => handlePresetDate(7 - new Date().getDay() + 6)} // Next Saturday
+              onClick={() => handlePresetDate(7 - new Date().getDay() + 6)}
             >
               Next weekend
             </button>
             <button
               className="block w-full text-left p-2 rounded hover:bg-gray-200"
-              onClick={() => handlePresetDate(7 - new Date().getDay() + 1)} // Next Monday
+              onClick={() => handlePresetDate(7 - new Date().getDay() + 1)}
             >
               Next week
             </button>

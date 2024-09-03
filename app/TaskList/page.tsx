@@ -34,9 +34,11 @@ const TaskList: React.FC<TaskListProps> = ({
     }
   };
   return (
-    <div className="bg-white p-4 rounded shadow relative">
-      <h1 className="text-2xl font-bold">Today</h1>
-      <div className="mt-4 p-4 border rounded">
+    <div className="bg-[#f8f8ff] p-4 rounded shadow relative">
+      <div className="flex justify-center ">
+        <h1 className="text-2xl font-extrabold">TO DO LIST</h1>
+      </div>
+      <div className="mt-4 p-4 border rounded border-2">
         <h2 className="text-xl font-bold">Add Task</h2>
         <input
           type="text"

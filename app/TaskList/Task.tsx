@@ -46,7 +46,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
   };
 
   return (
-    <div className="flex flex-col p-4 bg-white shadow rounded-md mb-4">
+    <div className="flex flex-col p-4 bg-white border-2  shadow rounded-md mt-6">
       {isEditing ? (
         <>
           <input
@@ -108,7 +108,7 @@ const TaskItem: React.FC<TaskItemProps> = ({
           </div>
           <div className="mt-4">
             <button
-              className="bg-blue-500 text-white p-2 rounded"
+              className="bg-[#f9e427] text-black p-2 rounded"
               onClick={() => setIsEditing(true)}
             >
               Chỉnh sửa

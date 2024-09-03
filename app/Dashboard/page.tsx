@@ -22,8 +22,8 @@ export default function Dashboard() {
   };
 
   const markTaskComplete = (index: number) => {
-    removeTask(index); // Xóa task khỏi danh sách
-    setCompletedTasks(completedTasks + 1); // Tăng số lượng task hoàn thành
+    removeTask(index);
+    setCompletedTasks(completedTasks + 1);
   };
 
   const updateTask = (index: number, newTask: Task) => {
@@ -35,9 +35,22 @@ export default function Dashboard() {
     setTasks([]);
   };
 
+  const handleSearch = (task: Task) => {
+    alert(
+      `Task found:\nName: ${task.taskName}\nDescription: ${
+        task.description
+      }\nDate: ${task.date?.toLocaleString()}`
+    );
+  };
+
   return (
     <div className="flex">
-      <Sidebar taskCount={tasks.length} completedTaskCount={completedTasks} />
+      <Sidebar
+        taskCount={tasks.length}
+        completedTaskCount={completedTasks}
+        tasks={tasks}
+        onSearch={handleSearch}
+      />
       <div className="flex-1 p-6">
         <TaskList
           tasks={tasks}
@@ -51,5 +64,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
-
